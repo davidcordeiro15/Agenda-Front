@@ -1,11 +1,13 @@
 import { useState } from "react"
-
+import { GoX } from "react-icons/go";
 
 export default function CreateTaskButton() {
+    const [textBox, setTextBox] = useState(false)
+
     //A seguinte função mostra o formulário para criar tarefas
     const [taskForm, setTaskForm] = useState("absolute invisible") 
     const showCreator = () => {
-        taskForm === "absolute invisible" ?  setTaskForm("visible") : setTaskForm("absolute invisible")
+        taskForm === "absolute invisible" ?  setTaskForm("visible flex justify-center") : setTaskForm("absolute invisible")
     }
 
     //Variaveis necessárias para criar uma tarefa
@@ -38,37 +40,45 @@ export default function CreateTaskButton() {
             alert("Por favor preencha todos os campos")
         } else {
             //Limpa os inputs
+            setTextBox(true)
+            setTimeout(() => {
+                setTextBox(false); 
+            }, 1500);
             console.log(task)
             setTitle("")
             setDescription("")
             setLocal("")
             setDate("")
+            setTaskForm("absolute invisible")
         }
 
     }
     return (
         <>
+            <div className="z-10 fixed top-0 w-full">
+                {textBox && <h2 className="bg-green-500 text-white p-4">Mensagem Enviada</h2>}
+            </div>
             <div className={taskForm}>
-                <form action="" className="z-10 fixed bg-slate-500 border-solid border-gray-900 flex  flex-col  gap-2">
+                <form action="" className="z-10 fixed bg-blue-200 p-8 border-gray-900 flex  flex-col gap-2">
                     <div className="flex gap-3">
-                        <button className="ml-3 mt-2">X</button>
+                        <button className="ml-3 "><GoX /></button>
                     </div>
-                        <h1 className="text-center">Crie sua tarefa!</h1>
-                    <div className="m-10 mt-0 mb-2">
+                        <h1 className="text-center text-2xl ">Crie sua tarefa!</h1>
+                    <div className="m-6 mt-0 mb-2 ">
                         <h2>Título da tarefa: </h2>
-                        <input type="text" value={title} onChange={handleTitle}/>
+                        <input className="m-2 rounded-md" type="text" value={title}  onChange={handleTitle}/>
                         <h2>Data e Horário da tarefa: </h2>
-                        <input type="datetime-local" value={date} onChange={handleDate}/>
+                        <input className="m-2 rounded-md" type="datetime-local" value={date} onChange={handleDate}/>
                         <h2>Local: </h2>
-                        <input type="text" value={local} onChange={handleLocal}/>
+                        <input className="m-2 rounded-md" type="text" value={local} onChange={handleLocal}/>
                         <h2>Descrição: </h2>
-                        <input type="text" value={description} onChange={handleDescription}/>
+                        <input className="m-2 rounded-md" type="text" value={description} onChange={handleDescription}/>
                     </div>
-                        <button onClick={createTask}>Criar tarefa</button>
+                        <button className="text-white bg-blue-500 border-solid border-4 border-blue-500 rounded-xl  " onClick={createTask}>Criar tarefa</button>
                 </form>
             </div>
-            <div>
-                <button onClick={showCreator} className="bg-blue-300 z-0" >Crie uma nova tarefa!</button>
+            <div className="flex justify-center">
+                <button onClick={showCreator} className=" text-white bg-blue-500 border-solid border-4 border-blue-500 rounded-xl z-0 text-sm p-2" >Crie uma nova tarefa!</button>
             </div>
         </>
     )

@@ -4,10 +4,10 @@ export default function Header() {
 
 
     return <>
-    <div className="m-2">
-        <button>Menu</button>
+    <div className="bg-gradient-to-b from-blue-100 to-blue-300 ">
+        
         <ul>
-            <li><NavLink to={"/"}>Home</NavLink></li>
+            <li className="p-2"><NavLink to={"/"}><p className="">Home</p></NavLink></li>
         </ul>
     </div>
     </>

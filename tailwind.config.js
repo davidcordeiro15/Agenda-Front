@@ -26,6 +26,9 @@ export const theme = {
     },
     animation: {
       typing: "typing 2s steps(20) "
+    },
+    fontFamily: {
+      merriweather: ["Merriweather", 'serif']
     }
   },
 };
