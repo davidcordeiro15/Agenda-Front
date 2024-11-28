@@ -27,8 +27,9 @@ export default function CreateTaskButton() {
         //Evita do site ser aualizado a cada criação
         m.preventDefault();
 
+
         //Criando um objeto para a tarefa
-        const task = {
+        const body = {
             title: title,
             description: description,
             local: local,
@@ -36,15 +37,24 @@ export default function CreateTaskButton() {
         }
 
         //Verifica se há algum campo vazio
-        if (task.title === "" || task.description === "" || task.local === "" || task.date === "") {
+        if (body.title === "" || body.description === "" || body.local === "" || body.date === "") {
             alert("Por favor preencha todos os campos")
         } else {
+            const response = fetch('http://localhost:8090/task', {
+                method: 'POST',
+                body: JSON.stringify(body),  // Remova o envolvimento extra do objeto aqui
+                headers: {'Content-type': 'application/json'}
+            });
+        
+            
+            
             //Limpa os inputs
             setTextBox(true)
             setTimeout(() => {
                 setTextBox(false); 
+                location.reload() // Reinicia a página para mostrar a nova tarefa
             }, 1500);
-            console.log(task)
+            console.log(body)
             setTitle("")
             setDescription("")
             setLocal("")
@@ -56,7 +66,7 @@ export default function CreateTaskButton() {
     return (
         <>
             <div className="z-10 fixed top-0 w-full">
-                {textBox && <h2 className="bg-green-500 text-white p-4">Mensagem Enviada</h2>}
+                {textBox && <h2 className="bg-green-500 text-white p-4">Tarefa Criada</h2>}
             </div>
             <div className={taskForm}>
                 <form action="" className="z-10 fixed bg-blue-200 p-8 border-gray-900 flex  flex-col gap-2">
@@ -68,7 +78,7 @@ export default function CreateTaskButton() {
                         <h2>Título da tarefa: </h2>
                         <input className="m-2 rounded-md" type="text" value={title}  onChange={handleTitle}/>
                         <h2>Data e Horário da tarefa: </h2>
-                        <input className="m-2 rounded-md" type="datetime-local" value={date} onChange={handleDate}/>
+                        <input className="m-2 rounded-md" type="date" value={date} onChange={handleDate}/>
                         <h2>Local: </h2>
                         <input className="m-2 rounded-md" type="text" value={local} onChange={handleLocal}/>
                         <h2>Descrição: </h2>

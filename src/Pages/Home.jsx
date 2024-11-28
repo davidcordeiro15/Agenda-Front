@@ -26,11 +26,13 @@ function Home() {
 
     const handleNext = () => {setCurrentMonthIndex(prevIndex => (prevIndex < 11 ? prevIndex + 1 : 0));};
 
+    
     useEffect(() => {
         // Atualiza o estado de monthDays com o número de dias do mês atual
         const daysArray = Array.from({ length: months[currentMonthIndex].days }, (_, i) => i + 1);
         setMonthDays(daysArray);
     }, [currentMonthIndex]); // Remove months da lista de dependências
+
 
     const currentMonth = months[currentMonthIndex];
 
