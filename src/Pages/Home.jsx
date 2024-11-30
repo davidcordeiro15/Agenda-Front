@@ -41,7 +41,7 @@ function Home() {
 
     return (
         <>
-            <h1 className="text-center text-3xl m-5">Organize seu dia</h1>
+            <h1 className="text-center text-3xl font-bold m-5">Organize seu dia!</h1>
             <CreateTaskButton></CreateTaskButton>
 
             <div className="bg-gradient-to-b from-blue-300 to-blue-400  p-4 mt-3 ">

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import Task from "../Task";
 
-function TaskList({ taskTitle, taskDescription, taskLocal, taskDate }) {
+function TaskList({taskLocal, taskDate }) {
     const [tasks, setTasks] = useState([]); // Inicializado como array vazio
     const apiAddress = "http://localhost:8090/task";
 
@@ -20,23 +21,22 @@ function TaskList({ taskTitle, taskDescription, taskLocal, taskDate }) {
             .catch((error) => console.error("Erro:", error));
     }, []);
 
+    const [textFindingTask, setTextFindingTask] = useState("Carregando tarefas...")
+
+    setTimeout(() => {
+        setTextFindingTask("Nenhuma tarefa foi encontrada, já pensou em criar uma?")
+    }, 3000);
     return (
         <div>
             <h1 className="text-xl m-5">Suas Tarefas:</h1>
             <div className="m-5">
                 {tasks.length > 0 ? (
                     tasks.map((task) => (
-                        <div key={task.id} className="mb-4 border-2 border-gray-300 rounded-lg p-5">
-                            <div className="flex justify-between mb-3">
-                                <h2 className="text-lg font-bold mr-1">{task.title}</h2>
-                                <p>{task.date}</p>
-                            </div>
-                            <p>{"Local: " + task.local}</p>
-                            <p>{task.description}</p>
-                        </div>
+                        //O React precisa de uma key em todo .map para organizar corretamente os elementos e aumentar o desempenho do código
+                        <Task key={task.id} taskId={task.id} taskDescription={task.description} taskTitle={task.title} taskDate={task.date} taskLocal={task.local}/>
                     ))
                 ) : (
-                    <p>Carregando tarefas...</p>
+                    <p className="text-center text-xl font-bold">{textFindingTask}</p>
                 )}
             </div>
         </div>
