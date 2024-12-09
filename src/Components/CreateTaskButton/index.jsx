@@ -88,7 +88,7 @@ export default function CreateTaskButton() {
                 </form>
             </div>
             <div className="flex justify-center">
-                <button onClick={showCreator} className=" text-white bg-blue-500 border-solid border-4 border-blue-500 rounded-xl z-0 text-sm p-2" >Crie uma nova tarefa!</button>
+                <button onClick={showCreator} className=" text-white bg-blue-500 border-solid border-4 border-blue-500 hover:bg-blue-600 hover:border-blue-600 rounded-xl z-0 text-sm p-2" >Crie uma nova tarefa!</button>
             </div>
         </>
     )

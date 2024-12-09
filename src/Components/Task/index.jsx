@@ -101,7 +101,7 @@ function Task({ taskId, taskTitle, taskDescription, taskLocal, taskDate }) {
             <div className={alertEditBox}>
                 <form
                     onSubmit={editTask}
-                    className="bg-blue-200 p-8 border-gray-900 flex flex-col gap-2 mb-4"
+                    className="bg-blue-200 p-8 border-gray-900 flex flex-col gap-2 mb-4 "
                 >
                     <div className="flex gap-3">
                         <button
